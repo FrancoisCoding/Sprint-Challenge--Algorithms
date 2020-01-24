@@ -92,12 +92,29 @@ class SortingRobot:
         """
         return self._light == "ON"
 
-    def sort(self):
+     def sort(self):
         """
         Sort the robot's list.
         """
         # Fill this out
-        pass
+
+        while self.can_move_right():
+            # Obtain the first item
+            self.swap_item()
+            # Check if robot can move right
+            while self.can_move_right():
+                # Move right while robot is able
+                self.move_right()
+                # Check value of items
+                if self.compare_item() == 1:
+                    # Swap item if item held value is less
+                    self.swap_item()
+            while self.compare_item() != None:
+                 # End of the list, move all the way back to the spot before the None value.
+                self.move_left()
+            # Swap the held value with None
+            self.swap_item()
+            self.move_right()
 
 
 if __name__ == "__main__":
